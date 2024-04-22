@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cactusli.lxf.dev.tech.infrastructure.dao.IEmployeeSalaryDAO">
+
+    <resultMap id="employSalaryMap" type="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeeSalaryPO">
+        <id column="id" property="id"/>
+        <result column="employee_number" property="employeeNumber"/>
+        <result column="salary_total_amount" property="salaryTotalAmount"/>
+        <result column="salary_merit_amount" property="salaryMeritAmount"/>
+        <result column="salary_base_amount" property="salaryBaseAmount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeeSalaryPO">
+        INSERT INTO employee_salary(employee_number, salary_total_amount, salary_merit_amount, salary_base_amount,
+        create_time, update_time)
+        VALUES(#{employeeNumber}, #{salaryTotalAmount}, #{salaryMeritAmount}, #{salaryBaseAmount}, now(), now())
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT INTO employee_salary(employee_number, salary_total_amount, salary_merit_amount, salary_base_amount,
+        create_time, update_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.employeeNumber}, #{item.salaryTotalAmount}, #{item.salaryMeritAmount}, #{item.salaryBaseAmount},
+            now(), now())
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeeSalaryPO">
+        UPDATE employee_salary SET
+        salary_total_amount = salary_total_amount + #{salaryTotalAmount},
+        salary_merit_amount = salary_merit_amount + #{salaryMeritAmount},
+        salary_base_amount = salary_base_amount + #{salaryBaseAmount}
+        WHERE employee_number = #{employeeNumber}
+    </update>
+
+    <select id="queryEmployeeSalaryByEmployNumber" parameterType="java.lang.String" resultMap="employSalaryMap">
+        SELECT employee_number, salary_total_amount, salary_merit_amount, salary_base_amount
+        FROM employee_salary
+        WHERE employee_number = #{employeeNumber}
+    </select>
+
+</mapper>

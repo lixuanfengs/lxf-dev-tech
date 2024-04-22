@@ -1,0 +1,5 @@
+spring:
+  config:
+    name: lxf-dev-tech-mybatis
+  profiles:
+    active: dev

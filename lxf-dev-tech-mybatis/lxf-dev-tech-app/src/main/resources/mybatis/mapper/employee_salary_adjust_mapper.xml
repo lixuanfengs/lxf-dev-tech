@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cactusli.lxf.dev.tech.infrastructure.dao.IEmployeeSalaryAdjustDAO">
+
+    <resultMap id="employeeSalaryAdjustMap" type="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeeSalaryAdjustPO">
+        <id column="id" property="id"/>
+        <result column="employee_number" property="employeeNumber"/>
+        <result column="adjust_order_id" property="adjustOrderId"/>
+        <result column="adjust_total_amount" property="adjustTotalAmount"/>
+        <result column="adjust_base_amount" property="adjustBaseAmount"/>
+        <result column="adjust_merit_amount" property="adjustMeritAmount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeeSalaryAdjustPO">
+        INSERT INTO employee_salary_adjust(employee_number, adjust_order_id, adjust_total_amount, adjust_base_amount, adjust_merit_amount, create_time, update_time)
+        VALUES(#{employeeNumber}, #{adjustOrderId}, #{adjustTotalAmount}, #{adjustBaseAmount}, #{adjustMeritAmount}, now(), now())
+    </insert>
+
+</mapper>

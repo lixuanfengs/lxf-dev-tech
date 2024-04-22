@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cactusli.lxf.dev.tech.infrastructure.dao.IEmployeeDAO">
+
+    <resultMap id="employeeMap" type="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeePO">
+        <id column="id" property="id"/>
+        <result column="employee_number" property="employeeNumber"/>
+        <result column="employee_name" property="employeeName"/>
+        <result column="employee_level" property="employeeLevel"/>
+        <result column="employee_title" property="employeeTitle"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeePO">
+        INSERT INTO employee(employee_number, employee_name, employee_level, employee_title, create_time, update_time)
+        VALUES(#{employeeNumber}, #{employeeName}, #{employeeLevel}, #{employeeTitle}, now(), now())
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT INTO employee(employee_number, employee_name, employee_level, employee_title, create_time, update_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.employeeNumber}, #{item.employeeName}, #{item.employeeLevel}, #{item.employeeTitle}, now(), now())
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="cn.cactusli.lxf.dev.tech.infrastructure.po.EmployeePO">
+        UPDATE employee SET employee_level = #{employeeLevel}, employee_title = #{employeeTitle}
+        WHERE employee_number = #{employeeNumber}
+    </update>
+
+    <select id="queryEmployeeByEmployNumber" parameterType="java.lang.String" resultMap="employeeMap">
+        SELECT employee_number, employee_name, employee_level, employee_title
+        FROM employee
+        WHERE employee_number = #{employeeNumber}
+    </select>
+
+</mapper>

@@ -1,0 +1,13 @@
+# 命令执行 docker-compose up -d
+version: '3.1'
+services:
+  zoo1:
+    image: zookeeper:3.9.0
+    container_name: zookeeper
+    restart: always
+    hostname: zoo1
+    ports:
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181

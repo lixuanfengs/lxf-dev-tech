@@ -1,0 +1,18 @@
+server:
+  port: 8090
+
+spring:
+    config:
+        name: lxf-dev-tech-dubbo
+
+dubbo:
+  application:
+    name: lxf-dev-tech-dubbo
+    version: 1.0.0
+  registry:
+    address: N/A  # N/A - 无zookeeper可配置 N/A 走直连模式测试
+  protocol:
+    name: dubbo
+    port: 20881
+  scan:
+    base-packages: cn.cactusli.dev.tech.dubbo.api

@@ -1,6 +1,5 @@
 version: '3.9'
 # 执行脚本；docker-compose -f docker-compose-v1.0.yml up -d
-# jdk1.8：https://www.alipan.com/s/9TAdfkSY125
 # https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
 services:
   jenkins:

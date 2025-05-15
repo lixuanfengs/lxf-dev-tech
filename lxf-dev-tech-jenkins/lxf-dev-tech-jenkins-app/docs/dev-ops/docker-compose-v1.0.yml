@@ -1,0 +1,26 @@
+version: '3.9'
+# 执行脚本；docker-compose -f docker-compose-v1.0.yml up -d
+# jdk1.8：https://www.alipan.com/s/9TAdfkSY125
+# https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+services:
+  jenkins:
+    image: jenkins/jenkins:2.510
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - "9090:8080"
+      - "50001:50000"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/local/bin/docker
+      - /dev-ops/maven/conf/settings.xml:/usr/local/maven/conf/settings.xml
+      - /dev-ops/maven/apache-maven-3.9.9:/usr/local/maven/apache-maven-3.9.9
+    #      - /dev-ops/jdk/jdk-17.0.15:/usr/local/jdk-17.0.15
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false # 禁止安装向导「如果需要密码则不要配置」docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

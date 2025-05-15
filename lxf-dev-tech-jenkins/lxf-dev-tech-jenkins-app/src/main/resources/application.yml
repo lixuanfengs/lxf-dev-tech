@@ -1,0 +1,5 @@
+spring:
+  config:
+    name: lxf-dev-tech-jenkins
+  profiles:
+    active: dev

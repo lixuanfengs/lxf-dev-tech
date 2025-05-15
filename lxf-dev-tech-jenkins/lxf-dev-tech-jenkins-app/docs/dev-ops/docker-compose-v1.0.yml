@@ -1,6 +1,6 @@
 version: '3.9'
 # 执行脚本；docker-compose -f docker-compose-v1.0.yml up -d
-# https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+# https://eastamerica.cloudflare.jenkins.io/current/update-center.json
 services:
   jenkins:
     image: jenkins/jenkins:2.510

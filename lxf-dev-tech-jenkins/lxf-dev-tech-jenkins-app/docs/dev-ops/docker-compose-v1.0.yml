@@ -11,6 +11,8 @@ services:
       - "9090:8080"
       - "50001:50000"
     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - ./jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/local/bin/docker
@@ -18,6 +20,7 @@ services:
       - ./maven/apache-maven-3.9.9:/usr/local/maven/apache-maven-3.9.9
     #      - /dev-ops/jdk/jdk-17.0.15:/usr/local/jdk-17.0.15
     environment:
+      - TZ=Asia/Shanghai
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false # 禁止安装向导「如果需要密码则不要配置」docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
     restart: unless-stopped
 

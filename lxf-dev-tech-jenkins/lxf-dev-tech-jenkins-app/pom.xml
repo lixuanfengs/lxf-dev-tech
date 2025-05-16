@@ -6,7 +6,6 @@
         <groupId>cn.cactusli</groupId>
         <artifactId>lxf-dev-tech-jenkins</artifactId>
         <version>1.0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>lxf-dev-tech-jenkins-app</artifactId>
